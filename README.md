@@ -3,7 +3,7 @@ Program that outputs a solution to a 2x2 Cube given an input configuration
 
 A work in progress
 
-The goal of this project was to create a program that accepts as an input the current state of a 2x2 Rubik's Cube ("Pocket Cube"), and outputs a step-by-step Beginner's Method solution of that cube, in order to guide the user through solving it using the Beginner's Method. I haven't extensively tested the solutions, so if you encounter an "invalid cube" error for what you're sure is a valid input cube, let me know. The program contains 7 total files -- 3 header/cpp pairs, and the runner file.
+The goal of this project was to create a program that accepts as an input the current state of a 2x2 Rubik's Cube ("Pocket Cube"), and outputs a step-by-step Beginner's Method solution of that cube, in order to guide the user through solving it using the Beginner's Method. I haven't extensively tested the solutions, so if you encounter an "invalid cube" error for what you're sure is a valid input cube, let me know. The program contains 7 total files -- 3 header/cpp pairs and the runner file.
 
 **Inputting the cube state**
 
