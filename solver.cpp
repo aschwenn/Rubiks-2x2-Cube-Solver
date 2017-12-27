@@ -2,10 +2,13 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <exception>
 
 #include "Cube.h"
 
 using namespace std;
+
+string iv = "Invalid cube -- no solutions possible. Make sure you have entered your cube's state correctly.";
 
 int readChar() {
 	while (true) {
@@ -24,37 +27,170 @@ int readChar() {
 	}
 }
 
+void firstLayer(Cube &c) {
+	/* Reference: 0 = up, 1 = right, 2 = left, 3 = front, 4 = back, 5 = down */
+	if (c.getSide(0).same() && c.getSide(0).color == 0) {
+		cout << "Side is already solved.";
+		return;
+	}
+
+	/* Color notation:
+	* 0: white
+	* 1: red
+	* 2: blue
+	* 3: orange
+	* 4: green
+	* 5: yellow
+	*/
+
+	/* We want the top face to be all white */
+	/* Find and place top left cubie */
+	Side u = c.getSide(0);
+	Side b = c.getSide(4);
+	Side l = c.getSide(2);
+	Side r = c.getSide(1);
+	Side f = c.getSide(3);
+	Side d = c.getSide(5);
+	if (!u.getupper().getleft() &&
+		b.getupper().getright() == 3 &&
+		l.getupper().getleft() == 4) {
+		// already in correct position
+	}
+	// check for cubie in top left of another face
+	else if (!l.getupper().getleft() && u.getupper().getleft() == 3) {
+		c.Up();
+		c.Lp();
+	}
+	else if (!f.getupper().getleft() && u.getlower().getleft() == 3) {
+		c.Lp();
+	}
+	else if (!r.getupper().getleft() && u.getlower().getright() == 3) {
+		c.U();
+		c.Lp();
+	}
+	else if (!b.getupper().getleft() && u.getupper().getright() == 3) {
+		c.U2();
+		c.Lp();
+	}
+	else if (!d.getupper().getleft() && f.getlower().getleft() == 3) {
+		c.L2();
+	}
+	// check for cubie in top right
+	else if (!l.getupper().getright() && f.getupper().getleft() == 3) {
+		c.Up();
+		c.Fp();
+		c.Lp();
+	}
+	else if (!f.getupper().getright() && r.getupper().getleft() == 3) {
+		c.Fp();
+		c.Lp();
+	}
+	else if (!r.getupper().getright() && b.getupper().getleft() == 3) {
+		c.U();
+		c.Fp();
+		c.Lp();
+	}
+	else if (!b.getupper().getright() && l.getupper().getleft() == 3) {
+		c.U2();
+		c.Fp();
+		c.Lp();
+	}
+	else if (!d.getupper().getright() && f.getlower().getright() == 4) {
+		c.R();
+		c.Fp();
+		c.Lp();
+	}
+	// check for cubie in bottom left
+	else if (!l.getlower().getleft() && b.getlower().getright() == 3) {
+		c.D();
+		c.F();
+		c.Lp();
+	}
+	else if (!f.getlower().getleft() && l.getlower().getright() == 3) {
+		c.F();
+		c.Lp();
+	}
+	else if (!r.getlower().getleft() && f.getlower().getright() == 3) {
+		c.Dp();
+		c.F();
+		c.Lp();
+	}
+	else if (!b.getlower().getleft() && r.getlower().getright() == 3) {
+		c.D2();
+		c.F();
+		c.Lp();
+	}
+	else if (!d.getlower().getleft() && b.getlower().getright() == 4) {
+		c.L2();
+		c.U();
+	}
+	// check for cubie in bottom right
+	else if (!l.getlower().getright() && f.getlower().getleft() == 4) {
+		c.D();
+		c.F2();
+		c.Lp();
+	}
+	else if (!f.getlower().getright() && r.getlower().getleft() == 4) {
+		c.F2();
+		c.Lp();
+	}
+	else if (!r.getlower().getright() && b.getlower().getleft() == 4) {
+		c.Dp();
+		c.F2();
+		c.Lp();
+	}
+	else if (!b.getlower().getright() && l.getlower().getleft() == 4) {
+		c.D2();
+		c.F2();
+		c.Lp();
+	}
+	else if (!d.getlower().getright() && u.getupper().getright() == 3) {
+		c.D2();
+		c.L2();
+	}
+	else {
+		throw iv;
+	}
+	// check that cube was properly placed
+	u = c.getSide(0);
+	b = c.getSide(4);
+	l = c.getSide(2);
+	r = c.getSide(1);
+	f = c.getSide(3);
+	d = c.getSide(5);
+	if (!(!u.getupper().getleft() &&
+		b.getupper().getright() == 3 &&
+		l.getupper().getleft() == 4)) {
+		cout << endl;
+		c.displayCube();
+		throw "Invalid cube or logic error -- cube cannot be solved.";
+	}
+
+	/* The top left cubie is placed correctly */
+	/* Find and place the top right cubie */
+}
+
+void orientFinal(Cube &c) {
+
+}
+
+void solveFinal(Cube &c) {
+
+}
+
 void beginnersMethod(Cube &c) {
 	/* Solve cube using beginner's method */
+	cout << endl << "To solve the first layer:" << endl;
+	firstLayer(c);
+	cout << endl << endl << "Your cube should now look like this:" << endl;
 	c.displayCube();
-	if (c.isSolved()) cout << "Solved!" << endl;
-	if (c.isValid()) cout << "Valid!" << endl;
-	c.U2();
-	c.U2();
-	c.R2();
-	c.R2();
-	c.L2();
-	c.L2();
-	c.F2();
-	c.F2();
-	c.B2();
-	c.B2();
-	c.D2();
-	c.D2();
+	cout << endl << "To orient the final layer:" << endl;
+	orientFinal(c);
+	cout << endl << endl << "Your cube should now look like this:" << endl;
 	c.displayCube();
-	cout << "Testing solution..." << endl;
-	c.U();
-	c.R();
-	c.U2();
-	c.F2();
-	c.Up();
-	c.R2();
-	c.Up();
-	c.F2();
-	c.R();
-	c.displayCube();
-	if (c.isSolved()) cout << "Solved!" << endl;
-	if (c.isValid()) cout << "Valid!" << endl;
+	cout << endl << "To solve the final layer:" << endl;
+	solveFinal(c);
+	cout << endl << endl << "Your cube is solved." << endl << endl;
 }
 
 void inputTestCube(Cube &c) {
@@ -209,6 +345,7 @@ void inputCube(Cube &c) {
 
 int main() {
 	cout << "Welcome to the 2x2 Rubik's Cube Solver!" << endl << endl;
+	string input;
 
 	/* Initialize cube */
 	Cube c;
@@ -216,12 +353,36 @@ int main() {
 	/* Enter loop */
 	while (true) {
 		/* Input cube data */
-		//inputTestCube(c);
-		inputCube(c);
+		inputTestCube(c);
+		c.displayCube();
+		//inputCube(c);
 
 		/* Solve cube */
-		//beginnersMethod(c);
+		try {
+			beginnersMethod(c);
+		}
+		catch (string error) {
+			cout << endl << error << endl;
+		}
+		catch (char* error) {
+			cout << endl << error << endl;
+		}
+		catch (...) {
+			cout << "Unknown error. Aborting program..." << endl;
+			system("pause");
+			exit(9);
+		}
 
+		cout << "Would you like to solve another cube? (y/n) ";
+		getline(cin, input);
+		if (cin.fail()) { cerr << "Input error."; exit(0); }
+		transform(input.begin(), input.end(), input.begin(), ::tolower);
+		if (input == "y" || input == "yes" || input == "ye" || input == " y" || input == "y " || input == " y ") {
+			continue;
+		}
+		else {
+			break;
+		}
 	}
 	return 0;
 }
