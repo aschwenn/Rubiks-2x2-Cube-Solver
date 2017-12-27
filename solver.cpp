@@ -45,6 +45,7 @@ void firstLayer(Cube &c) {
 
 	/* We want the top face to be all white */
 	/* Find and place top left cubie */
+	cout << "Placing the top left cubie: ";
 	Side u = c.getSide(0);
 	Side b = c.getSide(4);
 	Side l = c.getSide(2);
@@ -144,7 +145,7 @@ void firstLayer(Cube &c) {
 		c.F2();
 		c.Lp();
 	}
-	else if (!d.getlower().getright() && u.getupper().getright() == 3) {
+	else if (!d.getlower().getright() && b.getlower().getleft() == 3) {
 		c.D2();
 		c.L2();
 	}
@@ -165,9 +166,434 @@ void firstLayer(Cube &c) {
 		c.displayCube();
 		throw "Invalid cube or logic error -- cube cannot be solved.";
 	}
+	cout << flush << endl;
 
 	/* The top left cubie is placed correctly */
 	/* Find and place the top right cubie */
+	cout << "Placing the top right cubie: ";
+	if (!u.getupper().getright() &&
+		b.getupper().getleft() == 3 &&
+		r.getupper().getright() == 2) {
+		// already in correct position
+	}
+	// check for cubie in top left of another face
+	else if (!l.getupper().getleft() && u.getupper().getleft() == 2) {
+		// not possible
+		throw iv;
+	}
+	else if (!f.getupper().getleft() && u.getlower().getleft() == 2) {
+		c.F();
+		c.R();
+	}
+	else if (!r.getupper().getleft() && u.getlower().getright() == 2) {
+		c.U();
+		c.Fp();
+		c.Up();
+		c.F2();
+		c.R();
+	}
+	else if (!b.getupper().getleft() && u.getupper().getright() == 2) {
+		c.U2();
+		c.Fp();
+		c.U2();
+		c.F2();
+		c.R();
+	}
+	else if (!d.getupper().getleft() && f.getlower().getleft() == 2) {
+		c.D();
+		c.R2();
+	}
+	// check for cubie in top right
+	else if (!l.getupper().getright() && f.getupper().getleft() == 2) {
+		c.Up();
+		c.F();
+		c.U();
+		c.Fp();
+		c.R();
+	}
+	else if (!f.getupper().getright() && r.getupper().getleft() == 2) {
+		c.R();
+	}
+	else if (!r.getupper().getright() && b.getupper().getleft() == 2) {
+		c.U();
+		c.F();
+		c.Up();
+		c.Fp();
+		c.R();
+	}
+	else if (!b.getupper().getright() && l.getupper().getleft() == 2) {
+		c.U2();
+		c.F();
+		c.U2();
+		c.Fp();
+		c.R();
+	}
+	else if (!d.getupper().getright() && f.getlower().getright() == 3) {
+		c.R2();
+	}
+	// check for cubie in bottom left
+	else if (!l.getlower().getleft() && b.getlower().getright() == 2) {
+		c.D();
+		c.F2();
+		c.R();
+	}
+	else if (!f.getlower().getleft() && l.getlower().getright() == 2) {
+		c.F2();
+		c.R();
+	}
+	else if (!r.getlower().getleft() && f.getlower().getright() == 2) {
+		c.Dp();
+		c.F2();
+		c.R();
+	}
+	else if (!b.getlower().getleft() && r.getlower().getright() == 2) {
+		c.D2();
+		c.F2();
+		c.R();
+	}
+	else if (!d.getlower().getleft() && b.getlower().getright() == 3) {
+		c.D2();
+		c.R2();
+	}
+	// check for cubie in bottom right
+	else if (!l.getlower().getright() && f.getlower().getleft() == 3) {
+		c.D();
+		c.Fp();
+		c.R();
+	}
+	else if (!f.getlower().getright() && r.getlower().getleft() == 3) {
+		c.Fp();
+		c.R();
+	}
+	else if (!r.getlower().getright() && b.getlower().getleft() == 3) {
+		c.Dp();
+		c.Fp();
+		c.R();
+	}
+	else if (!b.getlower().getright() && l.getlower().getleft() == 3) {
+		c.D2();
+		c.Fp();
+		c.R();
+	}
+	else if (!d.getlower().getright() && b.getlower().getleft() == 2) {
+		c.Dp();
+		c.R2();
+	}
+	else {
+		throw iv;
+	}
+	// check that cube was properly placed
+	u = c.getSide(0);
+	b = c.getSide(4);
+	l = c.getSide(2);
+	r = c.getSide(1);
+	f = c.getSide(3);
+	d = c.getSide(5);
+	if (!(!u.getupper().getleft() &&
+		b.getupper().getright() == 3 &&
+		l.getupper().getleft() == 4) ||
+		!(!u.getupper().getright() &&
+			b.getupper().getleft() == 3 &&
+			r.getupper().getright() == 2)) {
+		cout << endl;
+		c.displayCube();
+		throw "Invalid cube or logic error -- cube cannot be solved.";
+	}
+	cout << flush << endl;
+
+	/* The top cubies are placed correctly */
+	/* Find and place the bottom left cubie */
+	cout << "Placing the bottom left cubie: ";
+	if (!u.getlower().getleft() &&
+		f.getupper().getleft() == 1 &&
+		l.getupper().getright() == 4) {
+		// already in correct position
+	}
+	// check for cubie in top left of another face
+	else if (!l.getupper().getleft() && u.getupper().getleft() == 4) {
+		// not possible
+		throw iv;
+	}
+	else if (!f.getupper().getleft() && u.getlower().getleft() == 4) {
+		c.Fp();
+		c.Bp();
+		c.Lp();
+		c.B();
+	}
+	else if (!r.getupper().getleft() && u.getlower().getright() == 4) {
+		c.Fp();
+	}
+	else if (!b.getupper().getleft() && u.getupper().getright() == 4) {
+		// not possible
+		throw iv;
+	}
+	else if (!d.getupper().getleft() && f.getlower().getleft() == 4) {
+		c.D();
+		c.F2();
+	}
+	// check for cubie in top right
+	else if (!l.getupper().getright() && f.getupper().getleft() == 1) {
+		c.F();
+		c.Rp();
+		c.Dp();
+		c.R();
+		c.F();
+	}
+	else if (!f.getupper().getright() && r.getupper().getleft() == 1) {
+		c.F();
+		c.Dp();
+		c.F();
+
+	}
+	else if (!r.getupper().getright() && b.getupper().getleft() == 1) {
+		// not possible
+		throw iv;
+	}
+	else if (!b.getupper().getright() && l.getupper().getleft() == 1) {
+		// not possible
+		throw iv;
+	}
+	else if (!d.getupper().getright() && f.getlower().getright() == 4) {
+		c.F2();
+	}
+	// check for cubie in bottom left
+	else if (!l.getlower().getleft() && b.getlower().getright() == 4) {
+		c.D();
+		c.Bp();
+		c.Lp();
+		c.B();
+	}
+	else if (!f.getlower().getleft() && l.getlower().getright() == 4) {
+		c.Bp();
+		c.Lp();
+		c.B();
+	}
+	else if (!r.getlower().getleft() && f.getlower().getright() == 4) {
+		c.Dp();
+		c.Bp();
+		c.Lp();
+		c.B();
+	}
+	else if (!b.getlower().getleft() && r.getlower().getright() == 4) {
+		c.D2();
+		c.Bp();
+		c.Lp();
+		c.B();
+	}
+	else if (!d.getlower().getleft() && b.getlower().getright() == 1) {
+		c.D2();
+		c.F2();
+	}
+	// check for cubie in bottom right
+	else if (!l.getlower().getright() && f.getlower().getleft() == 1) {
+		c.F();
+	}
+	else if (!f.getlower().getright() && r.getlower().getleft() == 1) {
+		c.Dp();
+		c.F();
+	}
+	else if (!r.getlower().getright() && b.getlower().getleft() == 1) {
+		c.D2();
+		c.F();
+	}
+	else if (!b.getlower().getright() && l.getlower().getleft() == 1) {
+		c.D();
+		c.F();
+	}
+	else if (!d.getlower().getright() && b.getlower().getleft() == 4) {
+		c.Dp();
+		c.F2();
+	}
+	else {
+		throw iv;
+	}
+	// check that cube was properly placed
+	u = c.getSide(0);
+	b = c.getSide(4);
+	l = c.getSide(2);
+	r = c.getSide(1);
+	f = c.getSide(3);
+	d = c.getSide(5);
+	if (!(!u.getupper().getleft() &&
+			b.getupper().getright() == 3 &&
+			l.getupper().getleft() == 4) ||
+		(!(!u.getupper().getright() &&
+			b.getupper().getleft() == 3 &&
+			r.getupper().getright() == 2)) ||
+		!(!u.getlower().getleft() &&
+			f.getupper().getleft() == 1 &&
+			l.getupper().getright() == 4)) {
+		cout << endl;
+		c.displayCube();
+		throw "Invalid cube or logic error -- cube cannot be solved.";
+	}
+	cout << flush << endl;
+
+	/* The top and left cubies are placed correctly */
+	/* Find and place the final bottom right cubie */
+	cout << "Placing the bottom right cubie: ";
+	if (!u.getlower().getright() &&
+		f.getupper().getright() == 1 &&
+		r.getupper().getleft() == 2) {
+		// already in correct position
+	}
+	// check for cubie in top left of another face
+	else if (!l.getupper().getleft() && u.getupper().getleft() == 1) {
+		// not possible
+		throw iv;
+	}
+	else if (!f.getupper().getleft() && u.getlower().getleft() == 1) {
+		// not possible
+		throw iv;
+	}
+	else if (!r.getupper().getleft() && u.getlower().getright() == 1) {
+		c.Rp();
+		c.Dp();
+		c.R();
+		c.D();
+		c.Lp();
+		c.Fp();
+		c.L();
+	}
+	else if (!b.getupper().getleft() && u.getupper().getright() == 1) {
+		// not possible
+		throw iv;
+	}
+	else if (!d.getupper().getleft() && f.getlower().getleft() == 1) {
+		c.D();
+		c.Rp();
+		c.D2();
+		c.R();
+		c.D();
+		c.Lp();
+		c.Fp();
+		c.L();
+	}
+	// check for cubie in top right
+	else if (!l.getupper().getright() && f.getupper().getleft() == 2) {
+		// not possible
+		throw iv;
+	}
+	else if (!f.getupper().getright() && r.getupper().getleft() == 2) {
+		c.Rp();
+		c.D();
+		c.R();
+		c.B();
+		c.R();
+		c.Bp();
+	}
+	else if (!r.getupper().getright() && b.getupper().getleft() == 2) {
+		// not possible
+		throw iv;
+	}
+	else if (!b.getupper().getright() && l.getupper().getleft() == 2) {
+		// not possible
+		throw iv;
+	}
+	else if (!d.getupper().getright() && f.getlower().getright() == 2) {
+		c.Rp();
+		c.D2();
+		c.R();
+		c.D();
+		c.Lp();
+		c.Fp();
+		c.L();
+	}
+	// check for cubie in bottom left
+	else if (!l.getlower().getleft() && b.getlower().getright() == 1) {
+		c.D2();
+		c.Lp();
+		c.Fp();
+		c.L();
+	}
+	else if (!f.getlower().getleft() && l.getlower().getright() == 1) {
+		c.D();
+		c.Lp();
+		c.Fp();
+		c.L();
+	}
+	else if (!r.getlower().getleft() && f.getlower().getright() == 1) {
+		c.Lp();
+		c.Fp();
+		c.L();
+	}
+	else if (!b.getlower().getleft() && r.getlower().getright() == 1) {
+		c.Dp();
+		c.Lp();
+		c.Fp();
+		c.L();
+	}
+	else if (!d.getlower().getleft() && b.getlower().getright() == 2) {
+		c.D2();
+		c.Lp();
+		c.F2();
+		c.L();
+		c.D();
+		c.Lp();
+		c.Fp();
+		c.L();
+	}
+	// check for cubie in bottom right
+	else if (!l.getlower().getright() && f.getlower().getleft() == 2) {
+		c.D();
+		c.B();
+		c.R();
+		c.Bp();
+	}
+	else if (!f.getlower().getright() && r.getlower().getleft() == 2) {
+		c.B();
+		c.R();
+		c.Bp();
+	}
+	else if (!r.getlower().getright() && b.getlower().getleft() == 2) {
+		c.Dp();
+		c.B();
+		c.R();
+		c.Bp();
+	}
+	else if (!b.getlower().getright() && l.getlower().getleft() == 2) {
+		c.D2();
+		c.B();
+		c.R();
+		c.Bp();
+	}
+	else if (!d.getlower().getright() && b.getlower().getleft() == 1) {
+		c.Dp();
+		c.Lp();
+		c.F2();
+		c.L();
+		c.D();
+		c.Lp();
+		c.Fp();
+		c.L();
+	}
+	else {
+		throw iv;
+	}
+	// check that cube was properly placed
+	u = c.getSide(0);
+	b = c.getSide(4);
+	l = c.getSide(2);
+	r = c.getSide(1);
+	f = c.getSide(3);
+	d = c.getSide(5);
+	if ((!(!u.getupper().getleft() &&
+			b.getupper().getright() == 3 &&
+			l.getupper().getleft() == 4) ||
+		!(!u.getlower().getright() &&
+			f.getupper().getright() == 1 &&
+			r.getupper().getleft() == 2)) ||
+		(!(!u.getupper().getright() &&
+			b.getupper().getleft() == 3 &&
+			r.getupper().getright() == 2)) ||
+		!(!u.getlower().getleft() &&
+			f.getupper().getleft() == 1 &&
+			l.getupper().getright() == 4)) {
+		cout << endl;
+		c.displayCube();
+		throw "Invalid cube or logic error -- cube cannot be solved.";
+	}
+	cout << flush;
 }
 
 void orientFinal(Cube &c) {
