@@ -1,4 +1,5 @@
-#pragma once
+#ifndef Side_h
+#define Side_h
 #include "Row.h"
 
 using namespace std;
@@ -28,3 +29,4 @@ public:
 	void setleftside(Row r);
 	void setrightside(Row r);
 };
+#endif

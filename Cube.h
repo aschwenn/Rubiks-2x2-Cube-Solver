@@ -1,4 +1,5 @@
-#pragma once
+#ifndef Cube_h
+#define Cube_h
 #include "Side.h"
 #include "Row.h"
 
@@ -66,3 +67,4 @@ public:
  * 4: green
  * 5: yellow
  */
+#endif

@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <time.h>
+#include <stdio.h>
 
 #include "Cube.h"
 
@@ -693,145 +694,145 @@ void orientFinal(Cube &c) {
 	Side d = c.getSide(5);
 	
 	/* Determine which of the orientations the cube is in */
-	int or = -1; // orientation
+	int ori = -1; // orientation
 	cout << "To align: ";
 	string n = "No alignment necessary.";
 	// U orientation == 0
 	if ((u.getupper().getright() == 5 && u.getlower().getright() == 5) &&
 		(l.getupper().getleft() == 5 && l.getupper().getright() == 5)){
 		cout << n;
-		or = 0;
+		ori= 0;
 	}
 	else if ((u.getupper().getleft() == 5 && u.getupper().getright() == 5) &&
 		(f.getupper().getleft() == 5 && f.getupper().getright() == 5)) {
 		c.U();
-		or = 0;
+		ori = 0;
 	}
 	else if ((u.getupper().getleft() == 5 && u.getlower().getleft() == 5) &&
 		(r.getupper().getleft() == 5 && r.getupper().getright() == 5)) {
 		c.U2();
-		or = 0;
+		ori = 0;
 	}
 	else if ((u.getlower().getleft() == 5 && u.getlower().getright() == 5) &&
 		(b.getupper().getleft() == 5 && b.getupper().getright() == 5)) {
 		c.Up();
-		or = 0;
+		ori = 0;
 	}
 	// T orientation == 1
 	else if ((u.getupper().getright() == 5 && u.getlower().getright() == 5) &&
 		(b.getupper().getright() == 5 && f.getupper().getleft() == 5)) {
 		cout << n;
-		or = 1;
+		ori = 1;
 	}
 	else if ((u.getupper().getleft() == 5 && u.getupper().getright() == 5) &&
 		(l.getupper().getright() == 5 && r.getupper().getleft() == 5)) {
 		c.U();
-		or = 1;
+		ori = 1;
 	}
 	else if ((u.getupper().getleft() == 5 && u.getlower().getleft() == 5) &&
 		(b.getupper().getleft() == 5 && f.getupper().getright() == 5)) {
 		c.U2();
-		or = 1;
+		ori = 1;
 	}
 	else if ((u.getlower().getleft() == 5 && u.getlower().getright() == 5) &&
 		(l.getupper().getleft() == 5 && r.getupper().getright() == 5)) {
 		c.Up();
-		or = 1;
+		ori = 1;
 	}
 	// L orientation == 2
 	else if ((u.getupper().getleft() == 5 && u.getlower().getright() == 5) &&
 		(r.getupper().getright() == 5 && f.getupper().getleft() == 5)) {
 		cout << n;
-		or = 2;
+		ori = 2;
 	}
 	else if ((u.getupper().getright() == 5 && u.getlower().getleft() == 5) &&
 		(b.getupper().getright() == 5 && r.getupper().getleft() == 5)) {
 		c.U();
-		or = 2;
+		ori = 2;
 	}
 	else if ((u.getupper().getleft() == 5 && u.getlower().getright() == 5) &&
 		(l.getupper().getright() == 5 && b.getupper().getleft() == 5)) {
 		c.U2();
-		or = 2;
+		ori = 2;
 	}
 	else if ((u.getupper().getright() == 5 && u.getlower().getleft() == 5) &&
 		(f.getupper().getright() == 5 && l.getupper().getleft() == 5)) {
 		c.Up();
-		or = 2;
+		ori = 2;
 	}
 	// S orientation == 3
 	else if ((u.getlower().getleft() == 5 && b.getupper().getright() == 5) &&
 		(r.getupper().getright() == 5 && f.getupper().getright() == 5)) {
 		cout << n;
-		or = 3;
+		ori = 3;
 	}
 	else if ((u.getlower().getright() == 5 && l.getupper().getright() == 5) &&
 		(b.getupper().getright() == 5 && r.getupper().getright() == 5)) {
 		c.U();
-		or = 3;
+		ori = 3;
 	}
 	else if ((u.getupper().getright() == 5 && f.getupper().getright() == 5) &&
 		(l.getupper().getright() == 5 && b.getupper().getright() == 5)) {
 		c.U2();
-		or = 3;
+		ori = 3;
 	}
 	else if ((u.getupper().getleft() == 5 && r.getupper().getright() == 5) &&
 		(f.getupper().getright() == 5 && l.getupper().getright() == 5)) {
 		c.Up();
-		or = 3;
+		ori = 3;
 	}
 	// As orientation == 4
 	else if ((u.getupper().getright() == 5 && r.getupper().getleft() == 5) &&
 		(f.getupper().getleft() == 5 && l.getupper().getleft() == 5)) {
 		cout << n;
-		or = 4;
+		ori = 4;
 	}
 	else if ((u.getupper().getleft() == 5 && b.getupper().getleft() == 5) &&
 		(f.getupper().getleft() == 5 && r.getupper().getleft() == 5)) {
 		c.U();
-		or = 4;
+		ori = 4;
 	}
 	else if ((u.getlower().getleft() == 5 && l.getupper().getleft() == 5) &&
 		(b.getupper().getleft() == 5 && r.getupper().getleft() == 5)) {
 		c.U2();
-		or = 4;
+		ori = 4;
 	}
 	else if ((u.getlower().getright() == 5 && f.getupper().getleft() == 5) &&
 		(l.getupper().getleft() == 5 && b.getupper().getleft() == 5)) {
 		c.Up();
-		or = 4;
+		ori = 4;
 	}
 	// Pi orientation == 5
 	else if ((b.getupper().getleft() == 5 && f.getupper().getright() == 5) &&
 		(l.getupper().getleft() == 5 && l.getupper().getright() == 5)) {
 		cout << n;
-		or = 5;
+		ori = 5;
 	}
 	else if ((l.getupper().getleft() == 5 && r.getupper().getright() == 5) &&
 		(f.getupper().getleft() == 5 && f.getupper().getright() == 5)) {
 		c.U();
-		or = 5;
+		ori = 5;
 	}
 	else if ((b.getupper().getright() == 5 && f.getupper().getleft() == 5) &&
 		(r.getupper().getleft() == 5 && r.getupper().getright() == 5)) {
 		c.U2();
-		or = 5;
+		ori = 5;
 	}
 	else if ((l.getupper().getright() == 5 && r.getupper().getleft() == 5) &&
 		(b.getupper().getleft() == 5 && b.getupper().getright() == 5)) {
 		c.Up();
-		or = 5;
+		ori = 5;
 	}
 	// H orientation == 6
 	else if ((b.getupper().getleft() == 5 && b.getupper().getright() == 5) &&
 		(f.getupper().getleft() == 5 && f.getupper().getright() == 5)) {
 		cout << n;
-		or = 6;
+		ori = 6;
 	}
 	else if ((l.getupper().getleft() == 5 && l.getupper().getright() == 5) &&
 		(r.getupper().getleft() == 5 && r.getupper().getright() == 5)) {
 		c.U();
-		or = 6;
+		ori = 6;
 	}
 	else {
 		temp.displayCube();
@@ -846,7 +847,7 @@ void orientFinal(Cube &c) {
 	/* Solve based on orientation */
 	temp = c;
 	cout << "Solve layer and orient sides: ";
-	switch (or) {
+	switch (ori) {
 	case 0: 
 		c.F();
 		cout << "( ";
@@ -970,7 +971,7 @@ void solveFinal(Cube &c) {
 	Side d = c.getSide(5);
 
 	/* Determine which of the two cases we're in */
-	int or = -1;
+	int ori = -1;
 	string a = "No alignment necessary.";
 	cout << "To align: ";
 	// If already solved, but not aligned
@@ -986,28 +987,28 @@ void solveFinal(Cube &c) {
 		else if (f.getupper().getleft() == 1) c.D();
 		else if (f.getupper().getleft() == 2) c.D2();
 		c.U();
-		or = 0;
+		ori = 0;
 	}
 	else if (l.getupper().same()) {
 		if (l.getupper().getleft() == 4) cout << a;
 		else if (l.getupper().getleft() == 3) c.Dp();
 		else if (l.getupper().getleft() == 1) c.D();
 		else if (l.getupper().getleft() == 2) c.D2();
-		or = 0;
+		ori = 0;
 	}
 	else if (b.getupper().same()) {
 		if (b.getupper().getleft() == 3) c.Dp();
 		else if (b.getupper().getleft() == 1) c.D();
 		else if (b.getupper().getleft() == 2) c.D2();
 		c.Up();
-		or = 0;
+		ori = 0;
 	}
 	else if (r.getupper().same()) {
 		if (r.getupper().getleft() == 3) c.Dp();
 		if (r.getupper().getleft() == 1) c.D();
 		if (r.getupper().getleft() == 2) c.D2();
 		c.U2();
-		or = 0;
+		ori = 0;
 	}
 	// Diagonal corners
 	else if (opposite(f.getupper().getleft(), b.getupper().getleft())) {
@@ -1015,7 +1016,7 @@ void solveFinal(Cube &c) {
 		else if (f.getupper().getright() == 3) c.U2();
 		else if (f.getupper().getleft() == 4) c.Up();
 		else if (f.getupper().getright() == 4) c.U();
-		or = 1;
+		ori = 1;
 	}
 	else {
 		temp.displayCube();
@@ -1029,7 +1030,7 @@ void solveFinal(Cube &c) {
 
 	/* Perform algorithm */
 	temp = c;
-	if (!or ) {
+	if (!ori ) {
 		cout << "Adjacent corners algorithm: ";
 		cout << "( ";
 		c.R();
@@ -1052,7 +1053,7 @@ void solveFinal(Cube &c) {
 		c.Fp();
 		cout << ")";
 	}
-	else if (or == 1) {
+	else if (ori == 1) {
 		cout << "Diagonal corners algorithm: ";
 		cout << "( ";
 		c.F();

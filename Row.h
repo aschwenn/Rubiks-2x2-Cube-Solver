@@ -1,4 +1,5 @@
-#pragma once
+#ifndef Row_h
+#define Row_h
 
 using namespace std;
 
@@ -21,3 +22,4 @@ public:
 	bool same(); // whether both cubies are the same color, sets color
 	int color; // -1 if !same, color id if same
 };
+#endif
