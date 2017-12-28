@@ -43,6 +43,8 @@ void firstLayer(Cube &c) {
 	* 5: yellow
 	*/
 
+	string a = "Cubie is already in position.";
+
 	/* We want the top face to be all white */
 	/* Find and place top left cubie */
 	cout << "Placing the top left cubie: ";
@@ -56,6 +58,7 @@ void firstLayer(Cube &c) {
 		b.getupper().getright() == 3 &&
 		l.getupper().getleft() == 4) {
 		// already in correct position
+		cout << a;
 	}
 	// check for cubie in top left of another face
 	else if (!l.getupper().getleft() && u.getupper().getleft() == 3) {
@@ -77,6 +80,9 @@ void firstLayer(Cube &c) {
 		c.L2();
 	}
 	// check for cubie in top right
+	else if (!u.getupper().getright() && r.getupper().getright() == 3) {
+		c.Up();
+	}
 	else if (!l.getupper().getright() && f.getupper().getleft() == 3) {
 		c.Up();
 		c.Fp();
@@ -102,6 +108,9 @@ void firstLayer(Cube &c) {
 		c.Lp();
 	}
 	// check for cubie in bottom left
+	else if (!u.getlower().getright() && f.getupper().getright() == 3) {
+		c.U2();
+	}
 	else if (!l.getlower().getleft() && b.getlower().getright() == 3) {
 		c.D();
 		c.F();
@@ -126,6 +135,9 @@ void firstLayer(Cube &c) {
 		c.U();
 	}
 	// check for cubie in bottom right
+	else if (!u.getlower().getleft() && l.getupper().getright() == 3) {
+		c.U();
+	}
 	else if (!l.getlower().getright() && f.getlower().getleft() == 4) {
 		c.D();
 		c.F2();
@@ -175,8 +187,13 @@ void firstLayer(Cube &c) {
 		b.getupper().getleft() == 3 &&
 		r.getupper().getright() == 2) {
 		// already in correct position
+		cout << a;
 	}
 	// check for cubie in top left of another face
+	else if (!u.getupper().getleft() && b.getupper().getright() == 2) {
+		// not possible
+		throw iv;
+	}
 	else if (!l.getupper().getleft() && u.getupper().getleft() == 2) {
 		// not possible
 		throw iv;
@@ -232,6 +249,12 @@ void firstLayer(Cube &c) {
 		c.R2();
 	}
 	// check for cubie in bottom left
+	else if (!u.getlower().getleft() && l.getupper().getright() == 2) {
+		c.Fp();
+		c.D();
+		c.Fp();
+		c.R();
+	}
 	else if (!l.getlower().getleft() && b.getlower().getright() == 2) {
 		c.D();
 		c.F2();
@@ -256,6 +279,11 @@ void firstLayer(Cube &c) {
 		c.R2();
 	}
 	// check for cubie in bottom right
+	else if (!u.getlower().getright() && f.getupper().getright() == 2) {
+		c.Rp();
+		c.Fp();
+		c.R();
+	}
 	else if (!l.getlower().getright() && f.getlower().getleft() == 3) {
 		c.D();
 		c.Fp();
@@ -308,8 +336,13 @@ void firstLayer(Cube &c) {
 		f.getupper().getleft() == 1 &&
 		l.getupper().getright() == 4) {
 		// already in correct position
+		cout << a;
 	}
 	// check for cubie in top left of another face
+	else if (!u.getupper().getleft() && l.getupper().getleft() == 1) {
+		// not possible
+		throw iv;
+	}
 	else if (!l.getupper().getleft() && u.getupper().getleft() == 4) {
 		// not possible
 		throw iv;
@@ -332,28 +365,32 @@ void firstLayer(Cube &c) {
 		c.F2();
 	}
 	// check for cubie in top right
-	else if (!l.getupper().getright() && f.getupper().getleft() == 1) {
+	else if (!u.getupper().getright() && r.getupper().getright() == 4) {
+		// not possible
+		throw iv;
+	}
+	else if (!l.getupper().getright() && f.getupper().getleft() == 4) {
 		c.F();
 		c.Rp();
 		c.Dp();
 		c.R();
 		c.F();
 	}
-	else if (!f.getupper().getright() && r.getupper().getleft() == 1) {
+	else if (!f.getupper().getright() && r.getupper().getleft() == 4) {
 		c.F();
 		c.Dp();
 		c.F();
 
 	}
-	else if (!r.getupper().getright() && b.getupper().getleft() == 1) {
+	else if (!r.getupper().getright() && b.getupper().getleft() == 4) {
 		// not possible
 		throw iv;
 	}
-	else if (!b.getupper().getright() && l.getupper().getleft() == 1) {
+	else if (!b.getupper().getright() && l.getupper().getleft() == 4) {
 		// not possible
 		throw iv;
 	}
-	else if (!d.getupper().getright() && f.getlower().getright() == 4) {
+	else if (!d.getupper().getright() && f.getlower().getright() == 1) {
 		c.F2();
 	}
 	// check for cubie in bottom left
@@ -385,6 +422,12 @@ void firstLayer(Cube &c) {
 		c.F2();
 	}
 	// check for cubie in bottom right
+	else if (!u.getlower().getright() && f.getupper().getright() == 4) {
+		c.Rp();
+		c.Dp();
+		c.R();
+		c.F();
+	}
 	else if (!l.getlower().getright() && f.getlower().getleft() == 1) {
 		c.F();
 	}
@@ -683,7 +726,7 @@ void orientFinal(Cube &c) {
 		or = 2;
 	}
 	else if ((u.getupper().getleft() == 5 && u.getlower().getright() == 5) &&
-		(l.getupper().getright() == 5 && r.getupper().getleft() == 5)) {
+		(l.getupper().getright() == 5 && b.getupper().getleft() == 5)) {
 		c.U2();
 		or = 2;
 	}
@@ -876,6 +919,7 @@ void solveFinal(Cube &c) {
 
 void beginnersMethod(Cube &c) {
 	/* Solve cube using beginner's method */
+	cout << endl << "----- SOLUTION -----" << endl;
 	cout << "To solve the first layer:" << endl;
 	firstLayer(c);
 	cout << endl << endl << "Your cube should now look like this:";
@@ -1049,9 +1093,9 @@ int main() {
 	/* Enter loop */
 	while (true) {
 		/* Input cube data */
-		inputTestCube(c);
-		c.displayCube();
-		//inputCube(c);
+		//inputTestCube(c);
+		//c.displayCube();
+		inputCube(c);
 
 		/* Solve cube */
 		try {
