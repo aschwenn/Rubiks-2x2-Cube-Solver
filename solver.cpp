@@ -191,7 +191,7 @@ void firstLayer(Cube &c) {
 		l.getupper().getleft() == 4)) {
 		cout << endl;
 		temp.displayCube();
-		throw "Invalid cube or logic error -- cube cannot be solved.";
+		throw iv;
 	}
 	cout << flush << endl;
 
@@ -339,7 +339,7 @@ void firstLayer(Cube &c) {
 			r.getupper().getright() == 2)) {
 		cout << endl;
 		temp.displayCube();
-		throw "Invalid cube or logic error -- cube cannot be solved.";
+		throw iv;
 	}
 	cout << flush << endl;
 
@@ -484,7 +484,7 @@ void firstLayer(Cube &c) {
 			l.getupper().getright() == 4)) {
 		cout << endl;
 		temp.displayCube();
-		throw "Invalid cube or logic error -- cube cannot be solved.";
+		throw iv;
 	}
 	cout << flush << endl;
 
@@ -652,7 +652,7 @@ void firstLayer(Cube &c) {
 			l.getupper().getright() == 4)) {
 		cout << endl;
 		temp.displayCube();
-		throw "Invalid cube or logic error -- cube cannot be solved.";
+		throw iv;
 	}
 	cout << flush;
 }
@@ -1030,7 +1030,7 @@ void solveFinal(Cube &c) {
 	/* Perform algorithm */
 	temp = c;
 	if (!or ) {
-		cout << "Adjacent corners: ";
+		cout << "Adjacent corners algorithm: ";
 		cout << "( ";
 		c.R();
 		c.U();
@@ -1053,7 +1053,7 @@ void solveFinal(Cube &c) {
 		cout << ")";
 	}
 	else if (or == 1) {
-		cout << "Diagonal corners: ";
+		cout << "Diagonal corners algorithm: ";
 		cout << "( ";
 		c.F();
 		c.R();
@@ -1337,14 +1337,14 @@ int main() {
 	/* Enter loop */
 	while (true) {
 		/* To test the program */
-		testbench(c);
+		//testbench(c); /* UNCOMMENT TO RUN TEST BENCH */
 
 		/* Input cube data */
-		//inputCube(c);
+		inputCube(c);
 
 		/* Solve cube */
 		try {
-			//beginnersMethod(c);
+			beginnersMethod(c);
 		}
 		catch (string error) {
 			errorsig = true;
