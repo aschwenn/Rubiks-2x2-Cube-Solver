@@ -18,6 +18,6 @@ public:
 
 	Row flip();
 
-	bool same; // whether both cubies are the same color
+	bool same(); // whether both cubies are the same color, sets color
 	int color; // -1 if !same, color id if same
 };

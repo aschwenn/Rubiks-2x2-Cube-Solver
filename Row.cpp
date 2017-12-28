@@ -1,21 +1,18 @@
 #include "Row.h"
 
 Row::Row(){
-	same = false;
 	color = -1;
 	left = 0;
 	right = 0;
 }
 
 Row::Row(const Row & r){
-	same = false;
 	color = -1;
 	left = r.getleft();
 	right = r.getright();
 }
 
 Row::Row(int l, int r) {
-	same = false;
 	color = -1;
 	left = l;
 	right = r;
@@ -42,4 +39,12 @@ Row Row::flip() {
 	left = right;
 	right = temp;
 	return Row(left,right);
+}
+
+bool Row::same() {
+	if (left == right) {
+		color = left;
+		return true;
+	}
+	return false;
 }
