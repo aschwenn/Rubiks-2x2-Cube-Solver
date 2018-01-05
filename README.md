@@ -3,8 +3,9 @@ Program that outputs a solution to a 2x2 Cube given an input configuration
 
 The goal of this project was to create a program that accepts as an input the current state of a 2x2 Rubik's Cube ("Pocket Cube"), and outputs a step-by-step Beginner's Method solution of that cube, in order to guide the user through solving it using the Beginner's Method. The program contains 7 total files -- 3 header/cpp pairs and the runner file.
 
-TO COMPILE: make
-TO RUN: ./solver
+**TO COMPILE:** make
+
+**TO RUN:** ./solver
 
 **Inputting the cube state**
 
