@@ -3,6 +3,9 @@ Program that outputs a solution to a 2x2 Cube given an input configuration
 
 The goal of this project was to create a program that accepts as an input the current state of a 2x2 Rubik's Cube ("Pocket Cube"), and outputs a step-by-step Beginner's Method solution of that cube, in order to guide the user through solving it using the Beginner's Method. The program contains 7 total files -- 3 header/cpp pairs and the runner file.
 
+TO COMPILE: make
+TO RUN: ./solver
+
 **Inputting the cube state**
 
 There are 3,674,140 possible positions that a 2x2 Rubik's cube can be in, meaning it would be infeasible for the solver to have an algorithm saved for every possible combination. Therefore, the program keeps a working virtual cube in order to check the current state of the user's cube and make sure that cube turns execute as intended. The virtual cube is implemented using 3 classes: Cube, Side, and Row. The Cube class contains 6 Side objects corresponding to each side of the cube, which in turn each contain two Row objects corresponding to the upper and lower rows. Each Row object contains two integer members, a left and a right cubie (individual squares on the cube). Using all of these as well as supporting functions which compute the result of any permutations done on a side (clockwise turn, counter-clockwise turn, or double turn), the program is able to keep a virtual cube which, ideally, mirrors the user's cube. When inputting a cube state, the user is presented with a visual aid and is asked for the color of each individual cubie. These can be inputted by typing 'r' for red, 'w' for white, 'b' for blue, 'g' for green, 'o' for orange, and 'y' for yellow. The user will be allowed the chance to confirm that the entered cube state is correct before proceeding.
